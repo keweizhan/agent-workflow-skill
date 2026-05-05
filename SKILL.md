@@ -1,107 +1,78 @@
 ---
 name: task-graph-executor
-description: Decompose complex user tasks into multi-step workflows and execute them using dependency-aware task graph (DAG).
+description: Decompose complex user tasks into multi-step workflows using DAG-based execution.
 version: 1.0.0
-metadata:
-  openclaw:
-    emoji: "🧠"
-    tags: ["agent", "workflow", "automation", "task-execution"]
 ---
 
-# Task Graph Executor Skill
+# Task Graph Executor
 
-## When to use this skill
+## When to use
 
-Use this skill when the user request involves:
-
-- Multi-step tasks
-- Tasks with dependencies
-- Complex workflows (analyze → process → generate)
-- Automation pipelines
+Use this skill when tasks involve multiple steps or dependencies.
 
 Examples:
-
-- "Analyze this repo and summarize it"
-- "Research a topic and write a report"
-- "Process a dataset and visualize results"
+- Analyze a repo and summarize it
+- Research a topic and generate a report
+- Process data and visualize results
 
 ---
 
 ## What this skill does
 
-This skill transforms a single user request into a structured execution workflow:
+This skill enables the AI to:
 
-1. Break task into smaller subtasks
-2. Identify dependencies between tasks
-3. Execute tasks in correct order
-4. Parallelize tasks where possible
-5. Combine results into final output
+1. Break down complex tasks
+2. Build a dependency graph (DAG)
+3. Execute tasks in order
+4. Parallelize independent steps
+5. Return structured results
 
 ---
 
 ## Execution Strategy
 
-### Step 1: Task Decomposition
+### Step 1: Decompose Task
 
-Convert user request into structured tasks:
+Convert user request into subtasks.
 
 Example:
 
-User request:
-"Analyze a GitHub repo and summarize it"
+User: "Analyze repo and summarize"
 
-Output:
-
-- task1: clone repository
-- task2: analyze codebase (depends on task1)
-- task3: generate summary (depends on task2)
+Tasks:
+- clone repo
+- analyze code
+- generate summary
 
 ---
 
-### Step 2: Build Task Graph (DAG)
+### Step 2: Build DAG
 
-- Represent tasks as nodes
-- Represent dependencies as edges
-- Ensure no circular dependencies
-
----
-
-### Step 3: Execution Rules
-
-- Execute tasks with no dependencies first
-- Wait for dependencies before executing dependent tasks
-- Execute independent tasks in parallel if possible
+- Identify dependencies
+- Ensure correct execution order
 
 ---
 
-### Step 4: Tool Usage
+### Step 3: Execute
 
-For each task, choose appropriate tools:
-
-- Code analysis → code tools
-- Research → search tools
-- Writing → LLM generation
+- Run independent tasks first
+- Wait for dependencies
+- Execute in parallel when possible
 
 ---
 
-### Step 5: Error Handling
-
-If a task fails:
-
-- Retry once
-- If still failing, skip and continue
-- Record failure in final output
-
----
-
-### Step 6: Output Format
+### Step 4: Output
 
 Return structured result:
 
-```json
 {
-  "tasks": [...],
-  "execution_order": [...],
-  "result": "...",
-  "status": "success / partial / failed"
+  "tasks": [],
+  "result": "",
+  "status": "success"
 }
+
+---
+
+## Goal
+
+Enable multi-step task execution instead of single tool calls.
