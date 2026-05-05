@@ -63,3 +63,14 @@ This skill introduces:
 
 ```bash
 npx clawhub install agent-workflow-skill
+```
+
+---
+
+## Demo
+
+Run:
+
+```bash
+python examples/demo.py
+```
